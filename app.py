@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain_community.llms import CTransformers
-
+import time 
 
 ## Function to get response from Llama 2 model
 
@@ -50,4 +50,15 @@ submit=st.button("Generate")
 
 ## Final response
 if submit:
-    st.write(getLLamaresponse(input_text,no_words,blog_style))
+    start_time = time.time()  # Record the start time
+
+    response_data = getLLamaresponse(input_text, no_words, blog_style)
+
+    end_time = time.time()  # Record the end time
+    time_taken = end_time - start_time  # Calculate time taken
+
+    # Display the generated output
+    st.write(response_data)
+
+    # Display the time taken
+    st.write(f"Time taken to generate the output: {time_taken:.2f} seconds")
